@@ -390,9 +390,9 @@ classA <- sqldf("select classA.*, againstAaway.Away_A_Schedule
 classA$A_Schedule <- round((classA$Home_A_Schedule + classA$Away_A_Schedule) / classA$Games_Played, digits = 2)
 
 # Create a cleaned up table for publishing online or other uses
+# If you just want a dataframe for analysis, no need to go any further than the above
 classA_clean <- 
   data.frame(classA$School,
-             classA$Performance_Points,
              classA$Wins, 
              classA$Losses, 
              classA$Win_Pct, 
@@ -404,12 +404,10 @@ classA_clean <-
              classA$dPPG,
              classA$Home_PPG_Diff, 
              classA$Away_PPG_Diff,
-             classA$A_Schedule,
-             classA$SOS)
+             classA$A_Schedule)
 
 names(classA_clean) <- 
   c("School",
-    "Performance Points",
     "Wins", 
     "Losses", 
     "Win %", 
@@ -421,17 +419,15 @@ names(classA_clean) <-
     "Def PPG",
     "Home PPG Diff", 
     "Away PPG Diff", 
-    "Class A Schedule",
-    "SOS")
+    "Class A Schedule")
 
-classA_clean <- classA_clean[, c(16, 1:15)]
-classA_clean$SOS <- round(classA_clean$SOS, digits = 2)
 classA_clean$`Win %` <- percent(classA_clean$`Win %`, scale = 100, suffix = "%")
 classA_clean$`Class A Schedule` <- percent(classA_clean$`Class A Schedule`, scale = 100, suffix = "%")
 
+# If you want to export to Excel, uncomment and run code below
 # write.xlsx2(classA, "classabbb.xlsx")
 
-
+# Use this to publish shinyapp -- you'll need to have something setup on shinyapps.io or your domain
 # Define UI for application that displays a table
 ui <- fluidPage(
   theme = "sandstone",
