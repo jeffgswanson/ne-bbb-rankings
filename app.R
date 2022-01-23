@@ -11,7 +11,7 @@ library(sqldf)
 library(xlsx)
 library(scales)
 
-# List of schools and class: https://nsaa-static.s3.amazonaws.com/textfile/bask/bbbclass.pdf
+# List of schools and class (2022): https://nsaahome.org/wp-content/uploads/2021/09/2021-22-NSAA-Boys-Basketball-Classifications.pdf
 
 # Manually create Class A names and enrollment dataframe
 School <-
